@@ -8,11 +8,19 @@
     <body>
         <h1>Laura's D3.js playground</h1>
         <script type="text/javascript">
+            var dataset = [ 5, 10, 15, 20, 25 ];
+
             d3.select("body").append("p").text("New paragraph!");
             d3.select("body").append("ol");
             d3.select("ol").append("li").text("omg im a list");
             d3.select("ol").append("li").text("omg im a list");
             d3.select("ol").append("li").text("omg im a list");
+
+            d3.select("body").selectAll("p")
+            .data(dataset)
+            .enter()
+            .append("p")
+            .text("New paragraph!");
         </script>
     </body>
 </html>

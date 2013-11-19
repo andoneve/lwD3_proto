@@ -1,0 +1,4 @@
+This is my D3.js playground. I made it public so that anyone can follow my progress as part of Berlin Hackership 2013 (http://www.hackership.org). 
+
+I'm following this tutorial/book: http://chimera.labs.oreilly.com/books/1230000000345/
+
