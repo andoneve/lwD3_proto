@@ -4,23 +4,71 @@
         <meta charset="utf-8">
         <title>D3 Page Template</title>
         <script type="text/javascript" src="../d3/d3.v3.js"></script>
+        <style>
+            div.bar {
+                display: inline-block;
+                width: 20px;
+                height: 75px; 
+                background-color: teal;
+                margin-right: 2px;
+            }
+        </style>
     </head>
     <body>
         <h1>Laura's D3.js playground</h1>
         <script type="text/javascript">
-            var dataset = [ 5, 10, 15, 20, 25 ];
+            var dataset = [];
+            for (var i = 0; i < 10; i++) {
+                var newNumber = Math.floor(Math.random() * 30);   
+                dataset.push(newNumber);              
+            }
 
-            d3.select("body").append("p").text("New paragraph!");
-            d3.select("body").append("ol");
-            d3.select("ol").append("li").text("omg im a list");
-            d3.select("ol").append("li").text("omg im a list");
-            d3.select("ol").append("li").text("omg im a list");
+            var w = 500;
+            var h = 100;
+            
+            var svg = d3.select("body")
+                        .append("svg")
+                        .attr("width", w)
+                        .attr("height", h);
 
-            d3.select("body").selectAll("p")
+            d3.select("body").selectAll("div")
             .data(dataset)
             .enter()
-            .append("p")
-            .text("New paragraph!");
+            .append("div")
+            .attr("class", "bar")
+            .style("height", function(d) {
+                var barHeight = d * 5;
+                return barHeight + "px";
+            });
+
+            svg.selectAll("rect")
+               .data(dataset)
+               .enter()
+               .append("rect")
+               .attr("x", function(d, i) {
+                    return i * (w / dataset.length);
+                })
+               .attr("y", 0)
+               .attr("width", 20)
+               .attr("height", 100);
+
+            var circles = svg.selectAll("circle")
+                             .data(dataset)
+                             .enter()
+                             .append("circle");
+
+            circles.attr("cx", function(d, i) {
+                return (i * 50) + 25;
+                    })
+                   .attr("cy", h/2)
+                   .attr("r", function(d) {
+                        return d;
+                   })
+                   .attr("fill", "orange")
+                   .attr("stroke", "red")
+                   .attr("stroke-width", function(d) {
+                        return d/2;
+                   });
         </script>
     </body>
 </html>
